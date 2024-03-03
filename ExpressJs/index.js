@@ -7,15 +7,25 @@ const app= express()
 app.use(express.json())
 // app.use(express.static(`${__dirname}/public/`))
 
-const router= express.Router()
+app.param('id', (req, res, next, id)=>{
+    const user={
+        userId: id,
+        name: 'Saifur Rahman'
+    }
+    req.userDetails= user
+    next()
+})
 
-app.use(router)
+app.get('/user/:id', (req, res)=>{
+    console.log(req.userDetails);
+    res.send('Welcome to the application!')
+})
 
 
-router.get('/', (req, res) =>{
+app.get('/', (req, res) =>{
     res.send('This is Home Page')
 })
-router.post('/', (req, res) =>{
+app.post('/', (req, res) =>{
     console.log(req.body);
     console.log("hello");
     res.send('This is Another Home Page')
