@@ -1,0 +1,15 @@
+{
+  "name": "raw-node-project",
+  "version": "1.0.0",
+  "description": "This an nodejs demo project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saifur Rahman",
+  "license": "ISC",
+  "dependencies": {
+    "superheroes": "^3.0.0"
+  }
+}
