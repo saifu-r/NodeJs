@@ -23,30 +23,43 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/active", async(req, res)=>{
-    const todo= new Todo()
-    const data= await todo.findActive()
+router.get("/active", async (req, res) => {
+  const todo = new Todo();
+  const data = await todo.findActive();
 
+  res.status(200).json({
+    data: data,
+  });
+});
+
+router.get("/js", async (req, res) => {
+  const data = await Todo.findByJS();
+
+  res.status(200).json({
+    data: data,
+  });
+});
+
+router.get("/language", async(req, res)=>{
+    const data= await Todo.find().byLanguage('express')
     res.status(200).json({
         data: data
     })
-
 })
 
-router.get("/:id", async (req, res) => { 
-    try {
-        const data= await Todo.find({ _id: req.params.id });
-        res.status(200).json({
-          message: "Todo was found successfully!",
-          data: data
-
-        });
-      } catch (error) {
-        res.status(500).json({
-          error: "There was a server side error!",
-          message: error.message, // Sending the error message for debugging
-        });
-      }
+router.get("/:id", async (req, res) => {
+  try {
+    const data = await Todo.find({ _id: req.params.id });
+    res.status(200).json({
+      message: "Todo was found successfully!",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "There was a server side error!",
+      message: error.message, // Sending the error message for debugging
+    });
+  }
 });
 
 router.post("/", async (req, res) => {

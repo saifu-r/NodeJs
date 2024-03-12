@@ -22,4 +22,16 @@ todoSchema.methods= {
     }
 }
 
+todoSchema.statics= {
+    findByJS: function(){
+        return this.find({title: /js/i})
+    }
+}
+
+todoSchema.query= {
+    byLanguage: function(language){
+        return this.find({title: new RegExp(language, "i")})
+    }
+}
+
 module.exports= todoSchema
